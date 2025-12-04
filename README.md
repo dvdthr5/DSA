@@ -1,3 +1,5 @@
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![C++](https://img.shields.io/badge/language-C++-yellow)
+<p align="center">
+  <img src="assets/logo.png" width="250">
+  <br>
+  <b>My Project</b>
+</p>
