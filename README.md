@@ -2,7 +2,55 @@
 
 ## Monotonic Stacks
 
-Monotic Stacks are useful when finding an element that comes next, whether that be for one element or an entire array. They can be used for classic problems like find the next greatest element and similar cases. In the case of next greatest element, the idea of using the stack is to iterate through the array, using the stack to track the element which the next greatest element have not been found for, popping the elements once found. 
+Monotonic Stacks are useful when finding the next element for some relation. Stacks provide easy management, constant time read and writes, and reduced complexity. Using a stack allows you to track all elements following a certain relation while only allowing you to access the most recently added element. Classic problems that can be optimally solved using monotonic stacks include nextGreaterElement and dailyTemperatures.
+nextGreatestElement(Leetcode I Variant)
+```cpp
+vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums2.size();
+        unordered_map<int, int> results;
+        stack<int> inStack;
+        for (int i : nums2){
+            while (!inStack.empty() && i > inStack.top()){
+                results[inStack.top()] = i;
+                inStack.pop();
+            }
+            inStack.push(i);
+        }
+        vector<int> answers;
+        answers.reserve(nums1.size());
+        for (int i: nums1){
+            auto it = results.find(i);
+            if (it == results.end()){
+                answers.push_back(-1);
+            }
+            else {
+                answers.push_back(results[i]);
+            }
+        }
+        return answers;
+    }
+```
+dailyTemperature:
+```cpp
+vector<int> dailyTemperatures(vector<int>& temperatures) {
+    stack<int> st;
+    int m = temperatures.size();
+    vector<int> answers(m, 0);
+    int counter = 0;
+    for (int i =0; i < m; i++){
+        while (!st.empty() && temperatures[i] > temperatures[st.top()]){
+            answers[st.top()] = i - st.top(); 
+            st.pop();
+        }
+            st.push(i);
+        }
+        return answers;
+    }
+```
+
+___
+
+
 
 ## Fast and Slow Pointers
 
@@ -11,3 +59,7 @@ Fast and slow pointers inolves using two pointers that traverse a graph at diffe
 ## Sliding Window
 
 When finding a subarray of k length, we use a sliding window of length k to save ourselves overhead on repeating calculations, subtracting the first value and adding the new value each times, instead of recalculating the sum of all k values. 
+
+## DFS
+
+Depth First Search(DFS) is the graph exploration method that looks down one path completely until it either fails a condition or reaches the end without the desired outcome. The concept behind recursive DFS algorithms is to edit the inductive variable, recursively call the method, and then swap the element back. This is the basis behind permutations. 
