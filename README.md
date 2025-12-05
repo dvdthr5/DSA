@@ -2,8 +2,28 @@
 
 ## Monotonic Stacks
 
-Monotonic Stacks are useful when finding the next element for some relation. Stacks provide easy management, constant time read and writes, and reduced complexity. Using a stack allows you to track all elements following a certain relation while only allowing you to access the most recently added element. Classic problems that can be optimally solved using monotonic stacks include nextGreaterElement and dailyTemperatures.
-nextGreatestElement(Leetcode I Variant)
+### Use Cases
+
+Monotonic stacks are most useful for problems that ask for
+
+- The next greatr or next smaller elemeent
+- The previous greater or previous smaller element
+- The nearest element that satisfies some ordering constraint
+- Efficiently processing elements that need to maintain a relationship with later elements
+
+Monotonic stacks maintain elements in sorted order (increasing or decreasing) as you iterate through the list. It allows for solving next/previous x questions in O(n) time. 
+
+### Why It Works
+
+A monotonic stack differs from a stack in that it is always sorted. There are two types, monotonically decreasing stacks, where the top is always the smallest element in the stack, and monotonically increasing stacks, where the top is always the largest element in the stack. 
+
+Whenever a value is introduced that would violate the sorted order, elements are popped from the top until the order is corrected. 
+
+Classic examples of problmes that can be solved with monotonic stacks include Next Greater Element, Daily Temperature, Stock Span, and variations of the histogram rectangle problems. 
+
+### Examples
+
+Next Greater Element (LeetCode Variant)
 ```cpp
 vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         int n = nums2.size();
@@ -30,7 +50,7 @@ vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         return answers;
     }
 ```
-dailyTemperature:
+Daily Temperatures
 ```cpp
 vector<int> dailyTemperatures(vector<int>& temperatures) {
     stack<int> st;
